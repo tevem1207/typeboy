@@ -1,6 +1,12 @@
 "use client";
 
-import { ComponentPropsWithoutRef, useRef, useState } from "react";
+import {
+  ComponentPropsWithoutRef,
+  FocusEventHandler,
+  KeyboardEventHandler,
+  useRef,
+  useState,
+} from "react";
 
 const text =
   "대충 흑백 사진에 글 쓰면 명언 같다. 대충 흑백 사진에 글 쓰면 명언 같다. 대충 흑백 사진에 글 쓰면 명언 같다.";
@@ -13,10 +19,17 @@ export const Editor = () => {
     inputRef.current?.focus();
   };
 
-  const handleInputFocus = () => {
-    const length = inputRef.current?.value?.length;
+  const handleInputFocus: FocusEventHandler<HTMLInputElement> = (event) => {
+    const input = event.target;
+    const length = input.value.length;
 
-    length && inputRef.current?.setSelectionRange(length, length);
+    input.setSelectionRange(length, length);
+  };
+
+  const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (event) => {
+    if ((event.ctrlKey || event.metaKey) && event.key === "a") {
+      event.preventDefault();
+    }
   };
 
   return (
@@ -43,6 +56,7 @@ export const Editor = () => {
           className="opacity-0"
           autoFocus
           onFocus={handleInputFocus}
+          onKeyDown={handleKeyDown}
           ref={inputRef}
           value={inputValue}
           onChange={({ target: { value } }) => setInputValue(value)}
