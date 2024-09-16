@@ -1,5 +1,6 @@
 "use client";
 
+import clsx from "clsx";
 import {
   ComponentPropsWithoutRef,
   FocusEventHandler,
@@ -42,9 +43,14 @@ export const Editor = () => {
         {text.split("").map((char, index) => {
           return (
             <div className="flex flex-col mb-4" key={`type-letter-${index}`}>
-              <EditorText>{char}</EditorText>
+              <EditorText className="cursor-default">{char}</EditorText>
               {inputValue[index] ? (
-                <EditorText>{inputValue[index]}</EditorText>
+                <EditorText
+                  isCursor={index === inputValue.length - 1}
+                  className="data-[cursor=true]:border-r"
+                >
+                  {inputValue[index]}
+                </EditorText>
               ) : (
                 <EditorText className="text-gray-300">{char}</EditorText>
               )}
@@ -55,6 +61,7 @@ export const Editor = () => {
           name="type"
           className="opacity-0"
           autoFocus
+          autoComplete="off"
           onFocus={handleInputFocus}
           onKeyDown={handleKeyDown}
           ref={inputRef}
@@ -66,10 +73,30 @@ export const Editor = () => {
   );
 };
 
-const EditorText = ({ children, ...props }: ComponentPropsWithoutRef<"p">) => {
-  return children === " " ? (
-    <p {...props}>&nbsp;</p>
-  ) : (
-    <p {...props}>{children}</p>
+const EditorText = ({
+  children,
+  className,
+  isCursor,
+  ...props
+}: ComponentPropsWithoutRef<"p"> & { isCursor?: boolean }) => {
+  return (
+    <div className="flex">
+      {children === " " ? (
+        <p
+          className={clsx("tracking-tight", !isCursor && "mr-[2px]", className)}
+          {...props}
+        >
+          &nbsp;
+        </p>
+      ) : (
+        <p
+          className={clsx("tracking-tight", !isCursor && "mr-[2px]", className)}
+          {...props}
+        >
+          {children}
+        </p>
+      )}
+      {isCursor && <span className="border animate-cursor border-gray-900" />}
+    </div>
   );
 };
