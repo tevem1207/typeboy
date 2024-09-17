@@ -70,13 +70,14 @@ const config = {
           to: { height: "0" },
         },
         cursor: {
-          "50%": { opacity: "0" },
+          "50%": { opacity: "1" },
+          "100%": { opacity: "0" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        cursor: "cursor 1s 1s ease-out infinite",
+        cursor: "cursor 1s ease  infinite",
       },
     },
   },
