@@ -6,14 +6,15 @@ import {
   FocusEventHandler,
   KeyboardEventHandler,
   useRef,
-  useState,
 } from "react";
+import { useTypingHook } from "./useTypingHook";
 
 const text =
   "대충 흑백 사진에 글 쓰면 명언 같다. 대충 흑백 사진에 글 쓰면 명언 같다. 대충 흑백 사진에 글 쓰면 명언 같다.";
 
 export const Editor = () => {
-  const [inputValue, setInputValue] = useState("");
+  const { inputText, cpm, accuracy, handleInputChange } = useTypingHook(text);
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const formFocusHandler = () => {
@@ -44,12 +45,12 @@ export const Editor = () => {
           return (
             <div className="flex flex-col mb-4" key={`type-letter-${index}`}>
               <EditorText className="cursor-default">{char}</EditorText>
-              {inputValue[index] ? (
+              {inputText[index] ? (
                 <EditorText
-                  isCursor={index === inputValue.length - 1}
+                  isCursor={index === inputText.length - 1}
                   className="data-[cursor=true]:border-r"
                 >
-                  {inputValue[index]}
+                  {inputText[index]}
                 </EditorText>
               ) : (
                 <EditorText className="text-gray-300">{char}</EditorText>
@@ -64,21 +65,21 @@ export const Editor = () => {
           autoComplete="off"
           onFocus={handleInputFocus}
           onKeyDown={handleKeyDown}
+          onChange={handleInputChange}
           ref={inputRef}
-          value={inputValue}
-          onChange={({ target: { value } }) => setInputValue(value)}
+          value={inputText}
         />
       </div>
 
       <div className="absolute bottom-2 right-4 flex gap-3 items-center">
         <div className="flex gap-4">
           <div>SPEED</div>
-          <div>{`${0 ?? 0} CPM`}</div>
+          <div>{`${cpm ?? 0} CPM`}</div>
         </div>
         <div className="h-5 border-r border-gray-900"></div>
         <div className="flex gap-4">
           <div>ACC</div>
-          <div>{`${0 ?? 0} %`}</div>
+          <div>{`${accuracy ?? 0} %`}</div>
         </div>
       </div>
     </form>
