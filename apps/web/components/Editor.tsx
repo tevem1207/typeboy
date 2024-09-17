@@ -36,7 +36,7 @@ export const Editor = () => {
   return (
     <form
       onClick={formFocusHandler}
-      className="max-w-[1280px] w-full h-96 border-y-slate-900 border-y mb-20 flex items-center"
+      className="max-w-[1280px] w-full h-96 border-y-slate-900 border-y-2 mb-20 flex items-center relative"
       action=""
     >
       <div className="px-10 flex flex-wrap text-3xl">
@@ -59,7 +59,7 @@ export const Editor = () => {
         })}
         <input
           name="type"
-          className="opacity-0"
+          className="opacity-0 absolute"
           autoFocus
           autoComplete="off"
           onFocus={handleInputFocus}
@@ -68,6 +68,18 @@ export const Editor = () => {
           value={inputValue}
           onChange={({ target: { value } }) => setInputValue(value)}
         />
+      </div>
+
+      <div className="absolute bottom-2 right-4 flex gap-3 items-center">
+        <div className="flex gap-4">
+          <div>SPEED</div>
+          <div>{`${0 ?? 0} CPM`}</div>
+        </div>
+        <div className="h-5 border-r border-gray-900"></div>
+        <div className="flex gap-4">
+          <div>ACC</div>
+          <div>{`${0 ?? 0} %`}</div>
+        </div>
       </div>
     </form>
   );
