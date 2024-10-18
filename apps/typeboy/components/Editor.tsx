@@ -45,6 +45,7 @@ export const Editor = () => {
           return (
             <div className="flex flex-col mb-4" key={`type-letter-${index}`}>
               <EditorText className="cursor-default">{char}</EditorText>
+              <div>{null}</div>
               {inputText[index] ? (
                 <EditorText
                   isCursor={index === inputText.length - 1}

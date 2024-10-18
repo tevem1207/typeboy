@@ -44,7 +44,6 @@ export const useTypingHook = (text: string) => {
     setStartTime(new Date());
     setElapsedTime(0);
     setCpm(0);
-    setAccuracy(100);
   };
 
   return {
