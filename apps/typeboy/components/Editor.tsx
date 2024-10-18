@@ -75,12 +75,12 @@ export const Editor = () => {
       <div className="absolute bottom-2 right-4 flex gap-3 items-center">
         <div className="flex gap-4">
           <div>SPEED</div>
-          <div>{`${cpm ?? 0} CPM`}</div>
+          <div>{`${cpm} CPM`}</div>
         </div>
         <div className="h-5 border-r border-gray-900"></div>
         <div className="flex gap-4">
           <div>ACC</div>
-          <div>{`${accuracy ?? 0} %`}</div>
+          <div>{`${accuracy} %`}</div>
         </div>
       </div>
     </form>
