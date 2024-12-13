@@ -1,4 +1,5 @@
 import { ChangeEventHandler, useState } from "react";
+import { disassemble } from "es-hangul";
 
 export const useTypingHook = (text: string) => {
   const [inputText, setInputText] = useState("");
@@ -8,7 +9,8 @@ export const useTypingHook = (text: string) => {
     ? new Date().getTime() - startTime.getTime()
     : 0;
 
-  const cpm = Math.round(inputText.length / (elapsedTime / 60000)) ?? 0;
+  const cpm =
+    Math.round(disassemble(inputText).length / (elapsedTime / 60000)) ?? 0;
 
   const accuracy =
     (inputText
