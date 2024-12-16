@@ -4,6 +4,7 @@ import clsx from "clsx";
 import {
   ComponentPropsWithoutRef,
   FocusEventHandler,
+  FormEventHandler,
   KeyboardEventHandler,
   useRef,
 } from "react";
@@ -17,7 +18,7 @@ export const Editor = () => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const formFocusHandler = () => {
+  const handleFormFocus = () => {
     inputRef.current?.focus();
   };
 
@@ -34,11 +35,16 @@ export const Editor = () => {
     }
   };
 
+  const handleFormSubmit: FormEventHandler = (event) => {
+    event.preventDefault();
+    console.log("제출");
+  };
+
   return (
     <form
-      onClick={formFocusHandler}
+      onFocus={handleFormFocus}
       className="max-w-[1280px] w-full h-96 border-y-slate-900 border-y-2 mb-20 flex items-center relative"
-      action=""
+      onSubmit={handleFormSubmit}
     >
       <div className="px-10 flex flex-wrap text-3xl">
         {text.split("").map((char, index) => {
