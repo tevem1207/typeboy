@@ -43,6 +43,7 @@ export const Editor = () => {
   return (
     <form
       onFocus={handleFormFocus}
+      onClick={handleFormFocus}
       className="max-w-[1280px] w-full h-96 border-y-slate-900 border-y-2 mb-20 flex items-center relative"
       onSubmit={handleFormSubmit}
     >
