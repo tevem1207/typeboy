@@ -47,7 +47,7 @@ export const Editor = () => {
       className="max-w-[1280px] w-full h-96 border-y-slate-900 border-y-2 mb-20 flex items-center relative"
       onSubmit={handleFormSubmit}
     >
-      <div className="px-10 flex flex-wrap text-3xl">
+      <div className="px-10 flex flex-wrap">
         {text.split("").map((char, index) => {
           return (
             <div className="flex flex-col mb-4" key={`type-letter-${index}`}>
@@ -101,19 +101,13 @@ const EditorText = ({
   ...props
 }: ComponentPropsWithoutRef<"p"> & { isCursor?: boolean }) => {
   return (
-    <div className="flex">
+    <div className="font-mono flex w-6 text-3xl justify-center">
       {children === " " ? (
-        <p
-          className={clsx("tracking-tight", !isCursor && "mr-[2px]", className)}
-          {...props}
-        >
+        <p className={clsx(!isCursor && "mr-[2px]", className)} {...props}>
           &nbsp;
         </p>
       ) : (
-        <p
-          className={clsx("tracking-tight", !isCursor && "mr-[2px]", className)}
-          {...props}
-        >
+        <p className={clsx(!isCursor && "mr-[2px]", className)} {...props}>
           {children}
         </p>
       )}
