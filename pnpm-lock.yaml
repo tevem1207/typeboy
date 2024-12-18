@@ -209,7 +209,20 @@ importers:
         specifier: ^5
         version: 5.5.4
 
-  packages/util: {}
+  packages/util:
+    devDependencies:
+      '@repo/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/node':
+        specifier: ^20
+        version: 20.11.6
+      typescript:
+        specifier: ^5
+        version: 5.5.4
 
 packages:
 
