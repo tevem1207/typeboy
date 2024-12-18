@@ -1,6 +1,5 @@
 "use client";
 
-import clsx from "clsx";
 import {
   ComponentPropsWithoutRef,
   FocusEventHandler,
@@ -10,6 +9,7 @@ import {
 } from "react";
 import { useTypingHook } from "./useTypingHook";
 import { formatNumber } from "@repo/util";
+import { cn } from "@repo/ui/lib/utils";
 
 const text =
   "대충 흑백 사진에 글 쓰면 명언 같다. 대충 흑백 사진에 글 쓰면 명언 같다.";
@@ -50,16 +50,28 @@ export const Editor = () => {
     >
       <div className="px-10 flex flex-wrap">
         {text.split("").map((char, index) => {
+          const isLast = index === inputText.length - 1;
+          const inputChar = inputText[index];
+
           return (
             <div className="flex flex-col mb-4" key={`type-letter-${index}`}>
-              <EditorText className="cursor-default">{char}</EditorText>
-              <div>{null}</div>
-              {inputText[index] ? (
+              <EditorText
+                className={cn(
+                  "cursor-default",
+                  !isLast &&
+                    inputChar &&
+                    inputChar !== char &&
+                    "text-red-600 font-semibold",
+                )}
+              >
+                {char}
+              </EditorText>
+              {inputChar ? (
                 <EditorText
                   isCursor={index === inputText.length - 1}
                   className="data-[cursor=true]:border-r"
                 >
-                  {inputText[index]}
+                  {inputChar}
                 </EditorText>
               ) : (
                 <EditorText className="text-gray-300">{char}</EditorText>
@@ -104,11 +116,11 @@ const EditorText = ({
   return (
     <div className="font-mono flex w-5 text-2xl justify-center">
       {children === " " ? (
-        <p className={clsx(!isCursor && "mr-[2px]", className)} {...props}>
+        <p className={cn(!isCursor && "mr-[2px]", className)} {...props}>
           &nbsp;
         </p>
       ) : (
-        <p className={clsx(!isCursor && "mr-[2px]", className)} {...props}>
+        <p className={cn(!isCursor && "mr-[2px]", className)} {...props}>
           {children}
         </p>
       )}
