@@ -9,9 +9,10 @@ import {
   useRef,
 } from "react";
 import { useTypingHook } from "./useTypingHook";
+import { formatNumber } from "@repo/util";
 
 const text =
-  "대충 흑백 사진에 글 쓰면 명언 같다. 대충 흑백 사진에 글 쓰면 명언 같다. 대충 흑백 사진에 글 쓰면 명언 같다.";
+  "대충 흑백 사진에 글 쓰면 명언 같다. 대충 흑백 사진에 글 쓰면 명언 같다.";
 
 export const Editor = () => {
   const { inputText, cpm, accuracy, handleInputChange } = useTypingHook(text);
@@ -82,12 +83,12 @@ export const Editor = () => {
       <div className="absolute bottom-2 right-4 flex gap-3 items-center">
         <div className="flex gap-4">
           <div>SPEED</div>
-          <div>{`${cpm} CPM`}</div>
+          <div>{`${formatNumber(cpm)} CPM`}</div>
         </div>
         <div className="h-5 border-r border-gray-900"></div>
         <div className="flex gap-4">
           <div>ACC</div>
-          <div>{`${accuracy} %`}</div>
+          <div>{`${formatNumber(accuracy)} %`}</div>
         </div>
       </div>
     </form>
@@ -101,7 +102,7 @@ const EditorText = ({
   ...props
 }: ComponentPropsWithoutRef<"p"> & { isCursor?: boolean }) => {
   return (
-    <div className="font-mono flex w-6 text-3xl justify-center">
+    <div className="font-mono flex w-5 text-2xl justify-center">
       {children === " " ? (
         <p className={clsx(!isCursor && "mr-[2px]", className)} {...props}>
           &nbsp;

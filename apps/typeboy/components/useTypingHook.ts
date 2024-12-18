@@ -9,14 +9,16 @@ export const useTypingHook = (text: string) => {
     ? new Date().getTime() - startTime.getTime()
     : 0;
 
-  const cpm =
-    Math.round(disassemble(inputText).length / (elapsedTime / 60000)) ?? 0;
+  const cpm = disassemble(inputText).length / (elapsedTime / 60000);
 
   const accuracy =
     (inputText
       .slice(0, -1)
       .split("")
-      .filter((char, index) => char === text[index]).length /
+      .filter((char, index) => {
+        console.log(char, text[index]);
+        return char === text[index];
+      }).length /
       inputText.slice(0, -1).length) *
     100;
 

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@repo/ui": "workspace:*",
+    "@repo/util": "workspace:*",
     "clsx": "^2.1.1",
     "es-hangul": "^2.2.3",
     "next": "14.2.8",
