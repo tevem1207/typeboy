@@ -67,14 +67,14 @@ export const Editor = () => {
                 {char}
               </EditorText>
               {inputChar ? (
-                <EditorText
-                  isCursor={index === inputText.length - 1}
-                  className="data-[cursor=true]:border-r"
-                >
-                  {inputChar}
-                </EditorText>
+                <EditorText>{inputChar}</EditorText>
               ) : (
-                <EditorText className="text-gray-300">{char}</EditorText>
+                <EditorText
+                  isCursor={index === inputText.length}
+                  className="text-gray-300"
+                >
+                  {char}
+                </EditorText>
               )}
             </div>
           );
@@ -115,16 +115,18 @@ const EditorText = ({
 }: ComponentPropsWithoutRef<"p"> & { isCursor?: boolean }) => {
   return (
     <div className="font-mono flex w-5 text-2xl justify-center">
+      {isCursor && (
+        <span className="border animate-cursor border-gray-900 box-border" />
+      )}
       {children === " " ? (
-        <p className={cn(!isCursor && "mr-[2px]", className)} {...props}>
+        <p className={cn(!isCursor && "ml-[2px]", className)} {...props}>
           &nbsp;
         </p>
       ) : (
-        <p className={cn(!isCursor && "mr-[2px]", className)} {...props}>
+        <p className={cn(!isCursor && "ml-[2px]", className)} {...props}>
           {children}
         </p>
       )}
-      {isCursor && <span className="border animate-cursor border-gray-900" />}
     </div>
   );
 };
